@@ -1,0 +1,25 @@
+/// <reference types="Cypress" />
+
+describe('Login', () => {
+  beforeEach(() => {
+    cy.visit('https://the-internet.herokuapp.com/login');
+  });
+
+  it('failed login - invalid password', () => {
+
+    // enter a username
+    cy.get('#username')
+      .type('tomsmith')
+      .should('have.value', 'tomsmith');
+
+    // select Login
+    cy.get('form').submit();
+    cy.wait(3000);
+    // confirm login success
+    cy.get('#flash').should('contain', 'Your password is invalid!');
+    cy.wait(3000);
+
+
+
+});
+});
