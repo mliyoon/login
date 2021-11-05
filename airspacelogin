@@ -30,3 +30,5 @@ describe('Login', () => {
     // confirm logout success
     cy.get('#flash').should('contain', 'You logged out of the secure area!');
 
+});
+});
