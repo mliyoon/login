@@ -1,35 +1,32 @@
+/// <reference types="Cypress" />
+
 describe('Login', () => {
+  beforeEach(() => {
+    cy.visit('https://the-internet.herokuapp.com/login');
+  });
 
-before(() => {
+  it('happy path: valid username and password', () => {
 
-// Login one before running the tests
+    // enter a username
+    cy.get('#username')
+      .type('tomsmith')
+      .should('have.value', 'tomsmith');
 
-cy.visit('https://the-internet.herokuapp.com/login');
+    // enter a password
+    cy.get('#password')
+      .type('SuperSecretPassword!')
+      .should('have.value', 'SuperSecretPassword!');
 
+    // select Login
+    cy.get('form').submit();
+    cy.wait(3000);
+    // confirm login success
+    cy.get('#flash').should('contain', 'You logged into a secure area!');
+    cy.wait(5000);
 
-// Get Form
-cy.get('form');
+    // success logout
+    cy.get('.button').click();
 
-// Happy Path - user name and pw match
+    // confirm logout success
+    cy.get('#flash').should('contain', 'You logged out of the secure area!');
 
-cy.get('username').type('tomsmith')
-.should('have.value', 'tomsmith');
-
-cy.get('password').type('SuperSecretPassword!')
-.should('have.value', 'SuperSecretPassword!');
-
-cy.get('form').submit();
-
-})
-
-
-
-beforeEach(() => {
-
-// Preserve the Cookies
-
-Cypress.Cookies.preserveOnce('sessionid', 'csrftoken');
-
-})
-
-})
