@@ -6,3 +6,4 @@ scenarios covered
 - only username is null
 - only pw is null
 - username and pw mismatch
+- invalid pw
