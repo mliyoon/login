@@ -1,0 +1,30 @@
+/// <reference types="Cypress" />
+
+describe('Login', () => {
+  beforeEach(() => {
+    cy.visit('https://the-internet.herokuapp.com/login');
+  });
+
+  it('failed login - username and pw mismatch', () => {
+
+    // enter a username
+    cy.get('#username')
+      .type('tomsmi')
+      .should('have.value', 'tomsmi');
+
+    // enter a password
+    cy.get('#password')
+      .type('SuperSecretPass')
+      .should('have.value', 'SuperSecretPass');
+
+    // select Login
+    cy.get('form').submit();
+    cy.wait(3000);
+    // confirm login success
+    cy.get('#flash').should('contain', 'Your username is invalid!');
+    cy.wait(3000);
+
+
+
+});
+});
