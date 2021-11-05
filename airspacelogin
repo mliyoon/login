@@ -1,0 +1,35 @@
+describe('Login', () => {
+
+before(() => {
+
+// Login one before running the tests
+
+cy.visit('https://the-internet.herokuapp.com/login');
+
+
+// Get Form
+cy.get('form');
+
+// Happy Path - user name and pw match
+
+cy.get('username').type('tomsmith')
+.should('have.value', 'tomsmith');
+
+cy.get('password').type('SuperSecretPassword!')
+.should('have.value', 'SuperSecretPassword!');
+
+cy.get('form').submit();
+
+})
+
+
+
+beforeEach(() => {
+
+// Preserve the Cookies
+
+Cypress.Cookies.preserveOnce('sessionid', 'csrftoken');
+
+})
+
+})
