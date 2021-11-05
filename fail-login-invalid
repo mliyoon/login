@@ -14,8 +14,8 @@ describe('Login', () => {
 
     // enter a password
     cy.get('#password')
-      .type('SuperSecretPass')
-      .should('have.value', 'SuperSecretPass');
+      .type('SuperSecretPass!')
+      .should('have.value', 'SuperSecretPass!');
 
     // select Login
     cy.get('form').submit();
